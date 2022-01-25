@@ -3,6 +3,7 @@ phases:
   install:
     runtime-versions:
       java: corretto11
+      node: 11
 
 phases:
   pre_build:
