@@ -13,9 +13,9 @@ phases:
       - npm build
       - npm test
       - mvn test  
-      - mvn sonar:sonar -Dsonar.login=37ee54f318e894bb05c02085e6ffa78fff2c4a60 -Dsonar.host.url=http://15.237.105.2:9000  -Dsonar.projectKey=aswanth -Dsonar.organization=aswanth-asokan
+      - mvn sonar:sonar -Dsonar.login=929581eade2d22324e080e1c6823ed52a50f2aa2 -Dsonar.host.url=http://15.237.105.2:9000  -Dsonar.projectKey=react -Dsonar.organization=aswanth-asokan
       - sleep 5
-      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=aswanth >result.json
+      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=react >result.json
       - cat result.json
       - if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
 
