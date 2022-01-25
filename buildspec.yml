@@ -3,7 +3,7 @@ phases:
   install:
     runtime-versions:
       java: corretto11
-      nodejs: 11
+      nodejs: 12
 
 phases:
   pre_build:
