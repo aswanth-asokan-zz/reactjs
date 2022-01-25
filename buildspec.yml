@@ -1,0 +1,27 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      java: corretto11
+
+phases:
+  pre_build:
+    commands:
+      - npm install
+  build:
+    commands:
+      - npm build
+      - npm test
+      - mvn test  
+      - mvn sonar:sonar -Dsonar.login=37ee54f318e894bb05c02085e6ffa78fff2c4a60 -Dsonar.host.url=http://15.237.105.2:9000  -Dsonar.projectKey=aswanth -Dsonar.organization=aswanth-asokan
+      - sleep 5
+      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=aswanth >result.json
+      - cat result.json
+      - if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
+
+reports:
+  jest_reports:
+    files:
+      - <report filename>
+    file-format: JUNITXML
+    base-directory: <test report directory>
